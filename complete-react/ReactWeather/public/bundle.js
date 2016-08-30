@@ -24916,7 +24916,23 @@
 	var Weather = React.createClass({
 	  displayName: 'Weather',
 
+	  getInitialState: function getInitialState() {
+	    return {
+	      location: 'Miami',
+	      temp: 88
+	    };
+	  },
+	  handleSearch: function handleSearch(location) {
+	    this.setState({
+	      location: location,
+	      temp: 23
+	    });
+	  },
 	  render: function render() {
+	    var _state = this.state;
+	    var temp = _state.temp;
+	    var location = _state.location;
+
 	    return React.createElement(
 	      'div',
 	      null,
@@ -24925,8 +24941,8 @@
 	        null,
 	        'Weather component'
 	      ),
-	      React.createElement(WeatherForm, null),
-	      React.createElement(WeatherMessage, null)
+	      React.createElement(WeatherForm, { onSearch: this.handleSearch }),
+	      React.createElement(WeatherMessage, { location: location, temp: temp })
 	    );
 	  }
 	});
@@ -24937,25 +24953,35 @@
 /* 219 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 
 	var React = __webpack_require__(1);
 
 	var WeatherForm = React.createClass({
-	  displayName: "WeatherForm",
+	  displayName: 'WeatherForm',
 
+	  onFormSubmit: function onFormSubmit(e) {
+	    e.preventDefault();
+
+	    var location = this.refs.location.value;
+
+	    if (location.length > 0) {
+	      this.refs.location.value = '';
+	      this.props.onSearch(location);
+	    }
+	  },
 	  render: function render() {
 	    return React.createElement(
-	      "div",
+	      'div',
 	      null,
 	      React.createElement(
-	        "form",
-	        null,
-	        React.createElement("input", { type: "text" }),
+	        'form',
+	        { onSubmit: this.onFormSubmit },
+	        React.createElement('input', { type: 'text', ref: 'location' }),
 	        React.createElement(
-	          "button",
+	          'button',
 	          null,
-	          "Get Weather"
+	          'Get Weather'
 	        )
 	      )
 	    );
@@ -24976,10 +25002,18 @@
 	  displayName: 'WeatherMessage',
 
 	  render: function render() {
+	    var _props = this.props;
+	    var temp = _props.temp;
+	    var location = _props.location;
+
+
 	    return React.createElement(
-	      'h2',
+	      'h3',
 	      null,
-	      'It is 80 in Shirley'
+	      'It is ',
+	      temp,
+	      ' in ',
+	      location
 	    );
 	  }
 	});
