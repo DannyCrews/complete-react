@@ -1,4 +1,5 @@
 module.exports = {
+  devtool: 'source-map',
   entry: './app/app.jsx',
   output: {
     path: __dirname,
@@ -12,6 +13,7 @@ module.exports = {
       Weather: 'app/components/Weather.jsx',
       WeatherForm: 'app/components/WeatherForm.jsx',
       WeatherMessage: 'app/components/WeatherMessage.jsx',
+      openWeatherMap: 'app/api/openWeatherMap.jsx',
       Examples: 'app/components/Examples.jsx',
       About: 'app/components/About.jsx'
     },
