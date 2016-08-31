@@ -1,5 +1,5 @@
 module.exports = {
-  devtool: 'source-map',
+  devtool: "inline-source-map",
   entry: './app/app.jsx',
   output: {
     path: __dirname,
