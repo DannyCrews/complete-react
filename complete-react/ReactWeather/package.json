@@ -1,6 +1,9 @@
 {
   "name": "boilerplate",
   "version": "1.0.0",
+  "engines": {
+    "node": "6.2.2"
+  },
   "description": "Simple react app",
   "main": "index.js",
   "scripts": {
